@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use RuntimeException;
+use Throwable;
 
 class SsoAuthController extends Controller
 {
@@ -75,13 +76,17 @@ class SsoAuthController extends Controller
 
             $signed = $ssoService->signPayload($payload);
 
-            Http::withHeaders([
-                'X-SSO-Signature' => $signed['signature'],
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
-            ])
-                ->timeout(3)
-                ->post(rtrim((string) config('services.sso.base_url'), '/').'/sso/backchannel/logout', $payload);
+            try {
+                Http::withHeaders([
+                    'X-SSO-Signature' => $signed['signature'],
+                    'Content-Type' => 'application/json',
+                    'Accept' => 'application/json',
+                ])
+                    ->timeout(3)
+                    ->post(rtrim((string) config('services.sso.base_url'), '/').'/sso/backchannel/logout', $payload);
+            } catch (Throwable $exception) {
+                report($exception);
+            }
         }
 
         Auth::logout();
