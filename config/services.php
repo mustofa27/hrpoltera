@@ -35,4 +35,14 @@ return [
         ],
     ],
 
+    'sso' => [
+        'base_url' => env('SSO_BASE_URL', 'https://sso.poltera.ac.id'),
+        'client_id' => env('SSO_CLIENT_ID'),
+        'client_secret' => env('SSO_CLIENT_SECRET'),
+        'redirect_uri' => env('SSO_REDIRECT_URI'),
+        'scope' => env('SSO_SCOPE', 'openid profile email'),
+        'logout_callback_uri' => env('SSO_LOGOUT_CALLBACK_URI'),
+        'allowed_timestamp_skew' => (int) env('SSO_ALLOWED_TIMESTAMP_SKEW', 300),
+    ],
+
 ];
