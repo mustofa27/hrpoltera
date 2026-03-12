@@ -30,6 +30,8 @@ Route::get('/login', function () {
     return redirect()->route('sso.redirect');
 })->name('login');
 
+Route::view('/logged-out', 'auth.logged-out')->name('logged-out');
+
 Route::middleware('guest')->group(function () {
     Route::get('/auth/sso/redirect', [SsoAuthController::class, 'redirect'])->name('sso.redirect');
     Route::get('/auth/sso/callback', [SsoAuthController::class, 'callback'])->name('sso.callback');
