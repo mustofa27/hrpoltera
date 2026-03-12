@@ -20,17 +20,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     if (! auth()->check()) {
-        return redirect()->route('sso.redirect');
+        return redirect()->route('login');
     }
 
     return redirect('/absensis');
 });
 
 Route::get('/login', function () {
-    return redirect()->route('sso.redirect');
-})->name('login');
+    if (auth()->check()) {
+        return redirect('/absensis');
+    }
 
-Route::view('/logged-out', 'auth.logged-out')->name('logged-out');
+    return view('auth.login');
+})->name('login');
 
 Route::middleware('guest')->group(function () {
     Route::get('/auth/sso/redirect', [SsoAuthController::class, 'redirect'])->name('sso.redirect');

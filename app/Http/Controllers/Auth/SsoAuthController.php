@@ -93,7 +93,7 @@ class SsoAuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('logged-out');
+        return redirect()->route('login');
     }
 
     private function resolveLocalUserFromUserInfo(array $userInfo): User
