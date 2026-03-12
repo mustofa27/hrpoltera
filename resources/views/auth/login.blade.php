@@ -7,7 +7,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-slate-100 flex items-center justify-center px-4 py-10">
-    <div class="w-full max-w-md">
+    <div class="w-full max-w-sm">
         <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
             <div class="px-6 pt-6 pb-5 border-b border-slate-100">
                 <h1 class="text-xl font-semibold text-slate-800">Sign in</h1>
